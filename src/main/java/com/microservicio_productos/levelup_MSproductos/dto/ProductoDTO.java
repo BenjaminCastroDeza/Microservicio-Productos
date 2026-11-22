@@ -32,6 +32,8 @@ public class ProductoDTO {
 
     private String descripcion;
 
+    @NotNull(message = "El stock es obligatorio")
+    @Min(value = 0, message = "El stock no puede ser un número negativo")
     @Builder.Default
     private Integer stock = 10;
 }
