@@ -1,5 +1,6 @@
 package com.microservicio_productos.levelup_MSproductos.config;
 
+import com.microservicio_productos.levelup_MSproductos.security.CustomAccessDeniedHandler;
 import com.microservicio_productos.levelup_MSproductos.security.JwtAuthenticationEntryPoint;
 import com.microservicio_productos.levelup_MSproductos.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
@@ -35,7 +37,10 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(unauthorizedHandler)
+                        .accessDeniedHandler(accessDeniedHandler)
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // Catalogo publico
@@ -50,6 +55,9 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
+
+                        // Dispatch interno de errores
+                        .requestMatchers("/error").permitAll()
 
                         // Operaciones CRUD de productos protegidas para Administradores
                         .requestMatchers(HttpMethod.POST, "/api/productos/**").hasAuthority("ROLE_ADMIN")
