@@ -4,7 +4,7 @@ Microservicio backend especializado en la **Gestión del Catálogo de Productos 
 
 ---
 
-## 🛠️ Tecnologías y Características
+## Tecnologías y Características
 - **Puerto:** `8082`
 - **Base de Datos:** MySQL (`levelup_tienda_db`)
 - **Seguridad:** Spring Security 6 Stateless + Validación de JWT emitido por MS-Login (comparte misma firma criptográfica)
@@ -33,16 +33,15 @@ Microservicio backend especializado en la **Gestión del Catálogo de Productos 
 
 ---
 
-## 📦 Catálogo Inicial Preconfigurado (`DataInitializer`)
+## Catálogo Inicial Preconfigurado (`DataInitializer`)
 Al iniciar la aplicación por primera vez se cargan automáticamente los 9 productos oficiales del frontend (Catan, Carcassonne, PS5, Mando Xbox, Silla Gamer Titan, etc.).
 
 ---
 
-## 🚀 Cómo Ejecutar
+## Cómo Ejecutar
 
 ```powershell
 cd "C:\Users\PC\Desktop\levelup-MSproductos\levelup-MSproductos"
 $env:JAVA_HOME = "C:\Program Files\Java\jdk-17"
 .\mvnw.cmd spring-boot:run
 ```
-Swagger UI disponible en: 👉 **[http://localhost:8082/swagger-ui.html](http://localhost:8082/swagger-ui.html)**
